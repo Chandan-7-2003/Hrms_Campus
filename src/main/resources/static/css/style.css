@@ -231,3 +231,9 @@ td.division-1ST {
     border-bottom-right-radius: 10px;
     flex-grow: 1; /* Allows card body to expand and fill the card */
 }
+.card a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}

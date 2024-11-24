@@ -1,127 +1,302 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Employee Home</title>-->
-<!--    <link rel="stylesheet" type="text/css" href="/css/style.css">-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-<!--</head>-->
-<!--<body>-->
-<!--<header>-->
-<!--    <img src="/images/hrmslogo.png" alt="HRMS Logo" class="logo">-->
-<!--    <span>Welcome to Magadh University - Employee</span>-->
-<!--</header>-->
-<!--<main>-->
-<!--    <div class="container">-->
-<!--        <h1>Employee Home Page</h1>-->
-<!--        <p>Welcome to the employee section.</p>-->
-<!--    </div>-->
-<!--</main>-->
-<!--</body>-->
-<!--</html>-->
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Admin Dashboard</title>-->
-<!--    <link rel="stylesheet" type="text/css" href="/css/style.css">-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-<!--</head>-->
-<!--<body>-->
-<!--<header>-->
-<!--    <img src="/images/hrmslogo.png" alt="HRMS Logo" class="logo">-->
-<!--    <span>Admin Dashboard</span>-->
-<!--    <a href="/logout" class="btn btn-secondary float-right">Logout</a>-->
-<!--</header>-->
-<!--<main class="container">-->
-<!--    <h1>Welcome Admin</h1>-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-header">Manage Employees</div>-->
-<!--                <div class="card-body">-->
-<!--                    <p>View and manage employee information.</p>-->
-<!--                    <a href="/employees" class="btn btn-primary">Go</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-header">Manage Students</div>-->
-<!--                <div class="card-body">-->
-<!--                    <p>View and manage student information.</p>-->
-<!--                    <a href="/students" class="btn btn-primary">Go</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-header">Reports</div>-->
-<!--                <div class="card-body">-->
-<!--                    <p>Generate and view reports.</p>-->
-<!--                    <a href="/reports" class="btn btn-primary">Go</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</main>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #EFFDEE;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: #1e1e2e; /* Dark navy */
+            color: white;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            padding-top: 1rem;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #343a40; /* Slightly lighter shade */
+        }
+
+        .sidebar .profile {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar .profile h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .sidebar .profile small {
+            color: #ddd;
+        }
+
+        /* Special Manage Employees button */
+ .sidebar .manage-employees {
+            background-color: #4CAF50;
+            border-radius: 5px;
+            margin: 0.5rem 1rem;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .manage-employees:hover {
+            background-color: #45a049;
+        }
+
+        .sidebar .manage-employees a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+            display: block;
+        }
+
+        /* Main content styles */
+        .main-content {
+            margin-left: 250px; /* Sidebar width */
+            padding: 2rem;
+            width: calc(100% - 250px);
+        }
+
+        .card {
+            box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            background: white;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: scale(1.03); /* Subtle zoom effect */
+        }
+
+        .card-header {
+            background-color: #4CAF50; /* Theme green */
+            color: white;
+            text-align: center;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #3e8e41;
+        }
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.card p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.card a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.card a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.actions a {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 30px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.actions a:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.actions {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.actions a:not(:last-child) {
+    margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .actions a {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+    </style>
 </head>
 <body>
 <header>
-    <img src="/images/hrmslogo.png" alt="HRMS Logo" class="logo">
-    <span>Admin Dashboard</span>
-    <a href="/logout" class="btn btn-secondary float-right">Logout</a>
+   <!-- <img src="/images/hrmslogo.png" alt="HRMS Logo" class="logo">-->
+    <span>Welcome to Magadh University</span>
 </header>
-<main class="container">
-    <h1>Welcome Admin</h1>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">Manage Employees</div>
-                <div class="card-body">
-                    <p>View and manage employee information.</p>
-                    <a href="/employees" class="btn btn-primary">Go</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">Manage Students</div>
-                <div class="card-body">
-                    <p>View and manage student information.</p>
-                    <a href="/students" class="btn btn-primary">Go</a>
-                </div>
-            </div>
-        </div>
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="profile">
+        <img src="/images/hrmslogo.png" alt="Profile Picture">
+        <h3>Admin</h3>
+    </div>
+    <a href="/home"><i class="bi bi-grid"></i> Dashboard</a>
+    <a href="/employees"><i class="bi bi-chat-dots"></i> Employees </a>
+    <a href="/students"><i class="bi bi-cart"></i> Students </a>
+    <a href="/employees/attendance/manage"><i class="bi bi-heart"></i> Attendance</a>
+    <hr>
+    <a href="#"><i class="bi bi-gear"></i> Profile</a>
+    <a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</div>
 
-        <div class="col-md-3">
+<!-- Main content -->
+<div class="main-content">
+    <div class="container">
+
+        <h1>Admin Dashboard</h1>
+        <p>Here you can manage your content and view details.</p>
+        <div class="dashboard">
             <div class="card">
-                <div class="card-header">Manage Attendance</div>
-                <div class="card-body">
-                    <p>View and manage attendance records.</p>
-                    <a href="/employees/attendance/manage" class="btn btn-primary">Go</a>
+                <h3>Total Employees</h3>
+                <p>3</p>
+                <a href="/employees">View Employees</a>
+            </div>
+            <div class="card">
+                <h3>Total Students</h3>
+                <p>2</p>
+                <a href="/students">View Students</a>
+            </div>
+            <div class="card">
+                <h3>Total Subjects</h3>
+                <p>4</p>
+                <a href="/subjects">View Subjects</a>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="/employees/create">Add New Employee</a>
+            <a href="/students/create">Add New Student</a>
+            <a href="/subjects/create">Add New Subject</a>
+            <a href="/mark_attendance">Mark Attendance</a>
+        </div>
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Manage Students</div>
+                    <div class="card-body">
+                        <p>View and manage student information.</p>
+                        <a href="/students" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Manage Attendance</div>
+                    <div class="card-body">
+                        <p>View and manage attendance records.</p>
+                        <a href="/employees/attendance/manage" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Manage Employee</div>
+                    <div class="card-body">
+                        <p>View and manage attendance records.</p>
+                        <a href="/employees" class="btn btn-primary">Go</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
-<!--   <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">Reports</div>
-                <div class="card-body">
-                    <p>Generate and view reports.</p>
-                    <a href="/reports" class="btn btn-primary">Go</a>
-                </div>
-            </div>
-        </div>-->
